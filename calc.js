@@ -97,6 +97,13 @@ document.querySelector('.run-tests').addEventListener('click', function() {
         handleButtonClick('clear');
         console.assert(testOutput.innerHTML === '', testOutput.innerHTML, 'pressing `C` did not clear the display');
 
+        // Second calculation
+        handleButtonClick('7');
+        handleButtonClick('+');
+        handleButtonClick('2');
+        handleButtonClick('=');
+        console.assert(testOutput.innerHTML === '9', testOutput.innerHTML, 'pressing `7+2=` after clearing did not result in "9"');
+
         console.log('All tests have run. (If you see no errors, they all passed!)');
         updateDisplay('');
 
