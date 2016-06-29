@@ -34,27 +34,27 @@ document.querySelector('.run-tests').addEventListener('click', function() {
 
     try {
         // Button click handler + Addition (multiple inputs)
-        handleButtonClick({ value: '1' });
+        handleButtonClick('1');
         console.assert(testOutput.innerHTML === '1', testOutput.innerHTML);
-        handleButtonClick({ value: '3' });
+        handleButtonClick('3');
         console.assert(testOutput.innerHTML === '13', testOutput.innerHTML);
-        handleButtonClick({ value: '+' });
+        handleButtonClick('+');
         console.assert(testOutput.innerHTML === '+', testOutput.innerHTML);
-        handleButtonClick({ value: '7' });
+        handleButtonClick('7');
         console.assert(testOutput.innerHTML === '7', testOutput.innerHTML);
-        handleButtonClick({ value: '+' });
+        handleButtonClick('+');
         console.assert(testOutput.innerHTML === '20', testOutput.innerHTML);
-        handleButtonClick({ value: '2' });
+        handleButtonClick('2');
         console.assert(testOutput.innerHTML === '2', testOutput.innerHTML);
-        handleButtonClick({ value: '.' });
+        handleButtonClick('.');
         console.assert(testOutput.innerHTML === '2.', testOutput.innerHTML);
-        handleButtonClick({ value: '7' });
+        handleButtonClick('7');
         console.assert(testOutput.innerHTML === '2.7', testOutput.innerHTML);
-        handleButtonClick({ value: '=' });
+        handleButtonClick('=');
         console.assert(testOutput.innerHTML === '22.7', testOutput.innerHTML);
 
         // Clear
-        handleButtonClick({ value: 'clear' });
+        handleButtonClick('clear');
         console.assert(testOutput.innerHTML === '', testOutput.innerHTML);
 
         // Addition
