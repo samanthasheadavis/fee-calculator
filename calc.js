@@ -2,7 +2,9 @@
 // TODO: DEFINE ANY VARIABLES HERE
 
 
+
 // TODO: DEFINE YOUR FUNCTIONS HERE
+
 
 
 /**
@@ -31,6 +33,7 @@ function handleButtonClick(buttonValue) {
 
 document.querySelector('.run-tests').addEventListener('click', function() {
     var testOutput = document.querySelector('.display figure');
+    updateDisplay('');
 
     try {
         // Button click handler + Addition (multiple inputs)
@@ -39,7 +42,7 @@ document.querySelector('.run-tests').addEventListener('click', function() {
         handleButtonClick('3');
         console.assert(testOutput.innerHTML === '13', testOutput.innerHTML);
         handleButtonClick('+');
-        console.assert(testOutput.innerHTML === '+', testOutput.innerHTML);
+        console.assert(testOutput.innerHTML === '13', testOutput.innerHTML);
         handleButtonClick('7');
         console.assert(testOutput.innerHTML === '7', testOutput.innerHTML);
         handleButtonClick('+');
