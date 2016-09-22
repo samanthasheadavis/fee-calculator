@@ -1,16 +1,14 @@
 //Samantha Driving
 //Marian Typing
 
+//WHAT WORKS: any single operation WITHOUT a decimal, multiple operations with the same operator. You have to put same sign used in place of equals to get result (i.e. instead of 5+5= result 10, 5+5+ result 10)
+//WHAT DOESN'T WORK: any operation with a decimal, the equals sign, operations with multiple different signs
+
 // TODO: DEFINE ANY VARIABLES HERE
 var printNumber = ''; //variable containing digits concatenated into string and printed to calculator screen
 var newNumber = ''; //variable that printNumber passes into and is logged as last clicked number
-var result = '0';
-var oldNumber = undefined; //variable that newNumber passes into and is logged as the oldest of two stored numbers
+var oldNumber = undefined; //variable that logs numbers input before operation (i.e. in 3 + 5, 3 is oldNumber, 5 is printNumber)
 
-
-console.log("printNumber: " + printNumber);
-console.log("newNumber: " + newNumber);
-console.log("oldNumber: " + oldNumber);
 
 // TODO: DEFINE YOUR FUNCTIONS HERE
 function buildNumber(value) {
@@ -59,17 +57,17 @@ function handleButtonClick(buttonValue) {
                 printNumber = ''; //resets display
                 break;
             } else {
-                printNumber = add(oldNumber, printNumber);
-                oldNumber = printNumber;
-                updateDisplay(oldNumber);
-                printNumber = '';
+                printNumber = add(oldNumber, printNumber); //initiates add function to add oldNumber (numbers typed before operation) to printNumber (numbers typed after)
+                oldNumber = printNumber; //sets oldNumber equal to printNumber (the result of the operation)
+                updateDisplay(oldNumber);//shows the result on the display
+                printNumber = '';//clears the variable
                 break;
             }
         case "-":
             if (oldNumber == undefined) {
                 oldNumber = printNumber;
-                updateDisplay(printNumber); //if someone starts with an operation, don't print anything (undefined = '')
-                printNumber = ''; //resets display
+                updateDisplay(printNumber);
+                printNumber = '';
                 break;
             } else {
                 printNumber = sub(oldNumber, printNumber);
@@ -83,8 +81,8 @@ function handleButtonClick(buttonValue) {
         case "x":
             if (oldNumber == undefined) {
                 oldNumber = printNumber;
-                updateDisplay(printNumber); //if someone starts with an operation, don't print anything (undefined = '')
-                printNumber = ''; //resets display
+                updateDisplay(printNumber);
+                printNumber = '';
                 break;
             } else {
                 printNumber = mult(oldNumber, printNumber);
@@ -98,8 +96,8 @@ function handleButtonClick(buttonValue) {
         case "/":
             if (oldNumber == undefined) {
                 oldNumber = printNumber;
-                updateDisplay(printNumber); //if someone starts with an operation, don't print anything (undefined = '')
-                printNumber = ''; //resets display
+                updateDisplay(printNumber);
+                printNumber = '';
                 break;
             } else {
                 printNumber = div(oldNumber, printNumber);
@@ -129,9 +127,8 @@ function handleButtonClick(buttonValue) {
             updateDisplay(printNumber);
 
     }
-
+//Testing, testing...
     console.log("printNumber: " + printNumber + " type: " + typeof(printNumber));
-    console.log("newNumber: " + newNumber + " type: " + typeof(newNumber));
     console.log("oldNumber: " + oldNumber + " type: " + typeof(oldNumber));
     console.log("buttonValue: " + buttonValue);
 }
