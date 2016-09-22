@@ -1,11 +1,45 @@
+//Samantha Driving
+//Marian Typing
 
 // TODO: DEFINE ANY VARIABLES HERE
+var printNumber = ''; //variable containing digits concatenated into string and printed to calculator screen
+var newNumber = ''; //variable that printNumber passes into and is logged as last clicked number
+var result = '0';
+var oldNumber = undefined; //variable that newNumber passes into and is logged as the oldest of two stored numbers
 
 
+console.log("printNumber: " + printNumber);
+console.log("newNumber: " + newNumber);
+console.log("oldNumber: " + oldNumber);
 
 // TODO: DEFINE YOUR FUNCTIONS HERE
+function buildNumber(value) {
+    printNumber += value; //concatenates value entered into calculator onto last number printed
+    // printNumber = parseFloat(printNumber);
+    printNumber = parseFloat(printNumber);
+    return printNumber;
+}
 
+//functions designating the operations
+function add(val1, val2) {
+    var sum = val1 + val2;
+    return sum;
+}
 
+function sub(val1, val2) {
+    var diff = val1 - val2;
+    return diff;
+}
+
+function div(val1, val2) {
+    var quot = val1 / val2;
+    return quot;
+}
+
+function mult(val1, val2) {
+    var prod = val1 * val2;
+    return prod;
+}
 
 /**
  * 		EDIT ME!
@@ -17,9 +51,96 @@
  */
 function handleButtonClick(buttonValue) {
 
-    // TODO: WRITE SOME OF YOUR CODE HERE
+    switch (buttonValue) {
+        case "+":
+            if (oldNumber == undefined) {
+                oldNumber = printNumber;
+                updateDisplay(printNumber); //if someone starts with an operation, don't print anything (undefined = '')
+                printNumber = ''; //resets display
+                break;
+            } else {
+                printNumber = add(oldNumber, printNumber);
+                oldNumber = printNumber;
+                updateDisplay(oldNumber);
+                printNumber = '';
+                break;
+            }
+        case "-":
+            if (oldNumber == undefined) {
+                oldNumber = printNumber;
+                updateDisplay(printNumber); //if someone starts with an operation, don't print anything (undefined = '')
+                printNumber = ''; //resets display
+                break;
+            } else {
+                printNumber = sub(oldNumber, printNumber);
+                oldNumber = printNumber;
+                updateDisplay(oldNumber);
+                printNumber = '';
+                break;
+            }
+            break;
 
+        case "x":
+            if (oldNumber == undefined) {
+                oldNumber = printNumber;
+                updateDisplay(printNumber); //if someone starts with an operation, don't print anything (undefined = '')
+                printNumber = ''; //resets display
+                break;
+            } else {
+                printNumber = mult(oldNumber, printNumber);
+                oldNumber = printNumber;
+                updateDisplay(oldNumber);
+                printNumber = '';
+                break;
+            }
+            break;
+
+        case "/":
+            if (oldNumber == undefined) {
+                oldNumber = printNumber;
+                updateDisplay(printNumber); //if someone starts with an operation, don't print anything (undefined = '')
+                printNumber = ''; //resets display
+                break;
+            } else {
+                printNumber = div(oldNumber, printNumber);
+                oldNumber = printNumber;
+                updateDisplay(oldNumber);
+                printNumber = '';
+                break;
+            }
+            break;
+
+        case ".":
+            if (printNumber.includes(".")) { //checking to see if the last number entered is a decimal
+                break; // if so, break signals that everything is fine and switch statement continues.
+            }
+            newNumber = buildNumber('.'); // this logs decimal to printNumber
+            printNumber = newNumber; // this logs the decimal into newNumber.
+            updateDisplay(printNumber);
+            break;
+        case 'clear':
+            printNumber = ''; // clears screen
+            oldNumber = undefined; // resets oldNumber
+            updateDisplay(printNumber);
+            break;
+
+        default:
+            printNumber = buildNumber(buttonValue); // logs number to
+            updateDisplay(printNumber);
+
+    }
+
+    console.log("printNumber: " + printNumber + " type: " + typeof(printNumber));
+    console.log("newNumber: " + newNumber + " type: " + typeof(newNumber));
+    console.log("oldNumber: " + oldNumber + " type: " + typeof(oldNumber));
+    console.log("buttonValue: " + buttonValue);
 }
+
+
+
+
+
+
 
 
 
@@ -107,7 +228,7 @@ document.querySelector('.run-tests').addEventListener('click', function() {
         console.log('All tests have run. (If you see no errors, they all passed!)');
         updateDisplay('');
 
-    } catch(e) {
+    } catch (e) {
         console.error('There was a syntax error during the test run:', e);
     }
 });
@@ -127,6 +248,7 @@ document.querySelector('.run-tests').addEventListener('click', function() {
 });
 
 var display = document.querySelector('.display figure');
+
 function updateDisplay(text) {
     display.innerText = text;
 }
