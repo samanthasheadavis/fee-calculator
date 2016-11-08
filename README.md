@@ -7,7 +7,6 @@ This was our first project using JavaScript to build the functionality for a sim
 * DRY up switch statement for handleButtonClick function.
 * Debug so that multiple operators can be used in a single equation.
 
-[See it on Github Pages](https://samanthasheadavis.github.io/sassTshirtShop/)
 #### Languages/Tools
 * JavaScript
 
