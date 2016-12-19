@@ -1,10 +1,12 @@
 //Samantha Driving
 //Marian Typing
 
-var printNumber = ''; //variable containing digits concatenated into string and printed to calculator screen
 var newNumber = ''; //variable that printNumber passes into and is logged as last clicked number
-var oldNumber = ''; //variable that logs numbers input before operation (i.e. in 3 + 5, 3 is oldNumber, 5 is printNumber)
 var total = '';
+var adding = false;
+var subtracting = false;
+var multiplying = false;
+var dividing = false;
 
 // TODO: DEFINE YOUR FUNCTIONS HERE
 function buildNumber(value) {
@@ -44,34 +46,101 @@ function multiply(val1, val2) {
  */
 function handleButtonClick(buttonValue) {
 
-  buildNumber(buttonValue);
-  updateDisplay(newNumber);
+    buildNumber(buttonValue);
+    updateDisplay(newNumber);
 
     if (buttonValue === 'clear') {
-      updateDisplay('');
-      newNumber = '';
-      total = '';
+        updateDisplay('');
+        newNumber = '';
+        total = '';
     } else if (buttonValue === '+') {
-      // console.log('printnumber' + newNumber);
-      total = add(total, newNumber);
-      total = parseFloat(total);
-      updateDisplay(total);
-      newNumber = '';
-    //  }
-    // else if (buttonValue === '=') {
-    //   newNumber = add(total, newNumber);
-    //   total = parseFloat(newNumber);
-    //   updateDisplay(total);
-    //   newNumber = '';
-  } else if (buttonValue === '-') {
-    console.log('printnumber' + newNumber);
-    total = subtract(total, newNumber);
-    total = parseFloat(total);
-    updateDisplay(total);
-    newNumber = '';
-  }
+        adding = true;
+        subtracting = false;
+        multiplying = false;
+        dividing = false;
 
-    console.log("buttonValue: " + buttonValue);
+        if (total === '') {
+            total = newNumber;
+            updateDisplay(newNumber);
+            newNumber = '';
+        } else {
+            total = add(total, newNumber);
+            total = parseFloat(total);
+            updateDisplay(total);
+            newNumber = '';
+        }
+    } else if (buttonValue === '-') {
+        adding = false;
+        subtracting = true;
+        multiplying = false;
+        dividing = false;
+
+        if (total === '') {
+            total = newNumber;
+            updateDisplay(newNumber);
+            newNumber = '';
+        } else {
+            total = subtract(total, parseFloat(newNumber));
+            total = parseFloat(total);
+            updateDisplay(total);
+            newNumber = '';
+        }
+    } else if (buttonValue === '/') {
+        adding = false;
+        subtracting = false;
+        multiplying = false;
+        dividing = true;
+
+        if (total === '') {
+            total = newNumber;
+            updateDisplay(newNumber);
+            newNumber = '';
+        } else {
+            total = divide(total, parseFloat(newNumber));
+            total = parseFloat(total);
+            updateDisplay(total);
+            newNumber = '';
+        }
+
+    } else if (buttonValue === 'x') {
+        adding = false;
+        subtracting = false;
+        multiplying = true;
+        dividing = false;
+
+        if (total === '') {
+            total = newNumber;
+            updateDisplay(newNumber);
+            newNumber = '';
+        } else {
+            total = multiply(total, parseFloat(newNumber));
+            total = parseFloat(total);
+            updateDisplay(total);
+            newNumber = '';
+        }
+    } else if (buttonValue === '=') {
+        if (adding) {
+            total = add(total, newNumber);
+            total = parseFloat(total);
+            updateDisplay(total);
+            newNumber = '';
+        } else if (subtracting) {
+            total = subtract(total, parseFloat(newNumber));
+            total = parseFloat(total);
+            updateDisplay(total);
+            newNumber = '';
+        } else if (dividing) {
+            total = divide(total, parseFloat(newNumber));
+            total = parseFloat(total);
+            updateDisplay(total);
+            newNumber = '';
+        } else if (multiplying) {
+            total = multiply(total, parseFloat(newNumber));
+            total = parseFloat(total);
+            updateDisplay(total);
+            newNumber = '';
+        }
+    }
 }
 
 
