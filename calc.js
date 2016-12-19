@@ -1,21 +1,16 @@
 //Samantha Driving
 //Marian Typing
 
-//WHAT WORKS: any single operation WITHOUT a decimal, multiple operations with the same operator. You have to put same sign used in place of equals to get result (i.e. instead of 5+5= result 10, 5+5+ result 10)
-//WHAT DOESN'T WORK: any operation with a decimal, the equals sign, operations with multiple different signs
-
-// TODO: DEFINE ANY VARIABLES HERE
 var printNumber = ''; //variable containing digits concatenated into string and printed to calculator screen
 var newNumber = ''; //variable that printNumber passes into and is logged as last clicked number
-var oldNumber = undefined; //variable that logs numbers input before operation (i.e. in 3 + 5, 3 is oldNumber, 5 is printNumber)
-
+var oldNumber = ''; //variable that logs numbers input before operation (i.e. in 3 + 5, 3 is oldNumber, 5 is printNumber)
+var total = '';
 
 // TODO: DEFINE YOUR FUNCTIONS HERE
 function buildNumber(value) {
-    printNumber += value; //concatenates value entered into calculator onto last number printed
-    // printNumber = parseFloat(printNumber);
-    printNumber = parseFloat(printNumber);
-    return printNumber;
+    newNumber += value; //concatenates value entered into calculator onto last number printed
+    newNumber = parseFloat(newNumber);
+    return newNumber;
 }
 
 //functions designating the operations
@@ -24,17 +19,17 @@ function add(val1, val2) {
     return sum;
 }
 
-function sub(val1, val2) {
+function subtract(val1, val2) {
     var diff = val1 - val2;
     return diff;
 }
 
-function div(val1, val2) {
+function divide(val1, val2) {
     var quot = val1 / val2;
     return quot;
 }
 
-function mult(val1, val2) {
+function multiply(val1, val2) {
     var prod = val1 * val2;
     return prod;
 }
@@ -49,96 +44,35 @@ function mult(val1, val2) {
  */
 function handleButtonClick(buttonValue) {
 
-    switch (buttonValue) {
-        case "+":
-            if (oldNumber == undefined) {
-                oldNumber = printNumber;
-                updateDisplay(printNumber); //if someone starts with an operation, don't print anything (undefined = '')
-                printNumber = ''; //resets display
-                break;
-            } else {
-                printNumber = add(oldNumber, printNumber); //initiates add function to add oldNumber (numbers typed before operation) to printNumber (numbers typed after)
-                oldNumber = printNumber; //sets oldNumber equal to printNumber (the result of the operation)
-                updateDisplay(oldNumber);//shows the result on the display
-                printNumber = '';//clears the variable
-                break;
-            }
-        case "-":
-            if (oldNumber == undefined) {
-                oldNumber = printNumber;
-                updateDisplay(printNumber);
-                printNumber = '';
-                break;
-            } else {
-                printNumber = sub(oldNumber, printNumber);
-                oldNumber = printNumber;
-                updateDisplay(oldNumber);
-                printNumber = '';
-                break;
-            }
-            break;
+  buildNumber(buttonValue);
+  updateDisplay(newNumber);
 
-        case "x":
-            if (oldNumber == undefined) {
-                oldNumber = printNumber;
-                updateDisplay(printNumber);
-                printNumber = '';
-                break;
-            } else {
-                printNumber = mult(oldNumber, printNumber);
-                oldNumber = printNumber;
-                updateDisplay(oldNumber);
-                printNumber = '';
-                break;
-            }
-            break;
+    if (buttonValue === 'clear') {
+      updateDisplay('');
+      newNumber = '';
+      total = '';
+    } else if (buttonValue === '+') {
+      // console.log('printnumber' + newNumber);
+      total = add(total, newNumber);
+      total = parseFloat(total);
+      updateDisplay(total);
+      newNumber = '';
+    //  }
+    // else if (buttonValue === '=') {
+    //   newNumber = add(total, newNumber);
+    //   total = parseFloat(newNumber);
+    //   updateDisplay(total);
+    //   newNumber = '';
+  } else if (buttonValue === '-') {
+    console.log('printnumber' + newNumber);
+    total = subtract(total, newNumber);
+    total = parseFloat(total);
+    updateDisplay(total);
+    newNumber = '';
+  }
 
-        case "/":
-            if (oldNumber == undefined) {
-                oldNumber = printNumber;
-                updateDisplay(printNumber);
-                printNumber = '';
-                break;
-            } else {
-                printNumber = div(oldNumber, printNumber);
-                oldNumber = printNumber;
-                updateDisplay(oldNumber);
-                printNumber = '';
-                break;
-            }
-            break;
-
-        case ".":
-            if (printNumber.includes(".")) { //checking to see if the last number entered is a decimal
-                break; // if so, break signals that everything is fine and switch statement continues.
-            }
-            newNumber = buildNumber('.'); // this logs decimal to printNumber
-            printNumber = newNumber; // this logs the decimal into newNumber.
-            updateDisplay(printNumber);
-            break;
-        case 'clear':
-            printNumber = ''; // clears screen
-            oldNumber = undefined; // resets oldNumber
-            updateDisplay(printNumber);
-            break;
-
-        default:
-            printNumber = buildNumber(buttonValue); // logs number to
-            updateDisplay(printNumber);
-
-    }
-//Testing, testing...
-    console.log("printNumber: " + printNumber + " type: " + typeof(printNumber));
-    console.log("oldNumber: " + oldNumber + " type: " + typeof(oldNumber));
     console.log("buttonValue: " + buttonValue);
 }
-
-
-
-
-
-
-
 
 
 /** **************************************************************
